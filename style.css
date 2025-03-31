@@ -1,0 +1,178 @@
+/* Base styles for the body, centering content vertically and horizontally */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+    margin: 0;
+    background-color: #black;
+    
+}
+
+body {
+    background-color: black !important;
+    color: white; /* Ensures text is visible */
+}
+
+
+
+/* Styles for the general container, providing layout and styling */
+.container {
+    width: 80%;
+    padding: 20px;
+    margin: 10px 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#container1 {
+    background-color: firebrick;
+    color: black;
+}
+
+
+/* Styles specifically for the second container, which holds the dice */
+#container2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#container3 {
+    display: flex;
+    justify-content: space-between; /* Pushes elements to opposite sides */
+    padding: 20px;
+    font-size: 24px; /* Keep it big and readable */
+    font-weight: bold;
+    background-color: blue; /* Keep the blue color */
+    color: white; /* Ensure text is readable */
+}
+
+#container1, #container3 {
+    font-size: 24px; /* Increase font size */
+    font-weight: bold; /* Make text bold */
+    font-family: "Poppins", sans-serif; /* Change to a cool font */
+    text-transform: uppercase; /* Optional: Make text uppercase for emphasis */
+}
+
+#container1, #container3 {
+    font-family: "Orbitron", sans-serif;
+}
+
+button {
+    font-size: 20px; /* Increase text size */
+    padding: 30px 30px; /* Increase button size */
+    border-radius: 30px; /* Round edges */
+    border: 2px solid black; /* Black border */
+    background-color: lightblue; /* Optional: Change button color */
+    color: black; /* Text color */
+    cursor: pointer; /* Show pointer on hover */
+    transition: all 0.3s ease; /* Smooth hover effect */
+    font-weight: bold;
+    margin-top: -30px; /* Moves the button up by approximately 1/2 inch */
+
+}
+
+/* Optional: Hover effect */
+button:hover {
+    background-color: darkseagreen;
+    color: white;
+}
+
+
+/* Container for holding both dice side by side */
+.dice-container {
+    display: flex;
+    gap: 60px;
+}
+
+/* Styles for the dice, setting up 3D perspective and initial transformation */
+.dice {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    transform-style: preserve-3d; /* Enables 3D transformations */
+    transform: rotateX(0deg) rotateY(0deg); /* Initial orientation */
+    transition: transform 2s ease; /* Smooth transition for rolling effect */
+}
+
+/* General styles for each face of the dice */
+.dice .face {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: lightblue;
+    border: 2px solid black;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d; /* Ensures 3D transformations for child elements */
+}
+
+/* Positioning each face in 3D space */
+.dice .face.one { transform: rotateX(90deg) translateZ(50px); } /* Top face */
+.dice .face.two { transform: rotateY(90deg) translateZ(50px); } /* Right face */
+.dice .face.three { transform: rotateY(180deg) translateZ(50px); } /* Back face */
+.dice .face.four { transform: rotateY(-90deg) translateZ(50px); } /* Left face */
+.dice .face.five { transform: rotateX(-90deg) translateZ(50px); } /* Bottom face */
+.dice .face.six { transform: translateZ(50px); } /* Front face */
+
+/* General dot styles, positioning them absolutely within each face */
+.dot {
+    width: 20px;
+    height: 20px;
+    background-color: black;
+    border-radius: 50%;
+    position: absolute;
+}
+
+/* Positioning dots for each face of the dice */
+
+/* Face one: Single center dot */
+.face.one .dot.one { top: 40px; left: 40px; }
+
+/* Face two: Two diagonal dots */
+.face.two .dot.one { top: 10px; left: 10px; }
+.face.two .dot.two { bottom: 10px; right: 10px; }
+
+/* Face three: Three dots, forming a diagonal */
+.face.three .dot.one { top: 10px; left: 10px; }
+.face.three .dot.two { top: 40px; left: 40px; }
+.face.three .dot.three { bottom: 10px; right: 10px; }
+
+/* Face four: Four corner dots */
+.face.four .dot.one { top: 10px; left: 10px; }
+.face.four .dot.two { top: 10px; right: 10px; }
+.face.four .dot.three { bottom: 10px; left: 10px; }
+.face.four .dot.four { bottom: 10px; right: 10px; }
+
+/* Face five: Five dots, four corners and one center */
+.face.five .dot.one { top: 10px; left: 10px; }
+.face.five .dot.two { top: 10px; right: 10px; }
+.face.five .dot.three { top: 40px; left: 40px; }
+.face.five .dot.four { bottom: 10px; left: 10px; }
+.face.five .dot.five { bottom: 10px; right: 10px; }
+
+/* Face six: Six dots, forming two vertical columns */
+.face.six .dot.one { top: 10px; left: 10px; }
+.face.six .dot.two { top: 10px; right: 10px; }
+.face.six .dot.three { top: 40px; left: 10px; }
+.face.six .dot.four { top: 40px; right: 10px; }
+.face.six .dot.five { bottom: 10px; left: 10px; }
+.face.six .dot.six { bottom: 10px; right: 10px; }
+
+/* Style for the active dice face */
+.dice .face.active {
+    background-color: #lightblue; /* Highlight with a lightblue background */
+    border-color: #2E7D32; /* Darker border color */
+}
+
+/* Optionally, you can add more visual emphasis, like enlarging the dot or adding animation */
+.dice .face.active .dot {
+    background-color: lightcoral; /* Make the dots stand out with a light coral */
+    transform: scale(1.2); /* Slightly enlarge the dots for emphasis */
+}

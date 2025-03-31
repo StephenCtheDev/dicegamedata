@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Dice Roller</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container" id="container1">
+        <p>Numbers Rolled</p>
+        <p id="output">Result: </p>
+    </div>
+    <div class="container" id="container2">
+        <div class="dice-container">
+            <div class="dice" id="dice1">
+                <div class="face one">
+                    <div class="dot one"></div>
+                </div>
+                <div class="face two">
+                    <div class="dot one"></div>
+                    <div class="dot two"></div>
+                </div>
+                <div class="face three">
+                    <div class="dot one"></div>
+                    <div class="dot two"></div>
+                    <div class="dot three"></div>
+                </div>
+                <div class="face four">
+                    <div class="dot one"></div>
+                    <div class="dot two"></div>
+                    <div class="dot three"></div>
+                    <div class="dot four"></div>
+                </div>
+                <div class="face five">
+                    <div class="dot one"></div>
+                    <div class="dot two"></div>
+                    <div class="dot three"></div>
+                    <div class="dot four"></div>
+                    <div class="dot five"></div>
+                </div>
+                <div class="face six">
+                    <div class="dot one"></div>
+                    <div class="dot two"></div>
+                    <div class="dot three"></div>
+                    <div class="dot four"></div>
+                    <div class="dot five"></div>
+                    <div class="dot six"></div>
+                </div>
+            </div>
+            <div class="dice" id="dice2">
+                <div class="face one">
+                    <div class="dot one"></div>
+                </div>
+                <div class="face two">
+                    <div class="dot one"></div>
+                    <div class="dot two"></div>
+                </div>
+                <div class="face three">
+                    <div class="dot one"></div>
+                    <div class="dot two"></div>
+                    <div class="dot three"></div>
+                </div>
+                <div class="face four">
+                    <div class="dot one"></div>
+                    <div class="dot two"></div>
+                    <div class="dot three"></div>
+                    <div class="dot four"></div>
+                </div>
+                <div class="face five">
+                    <div class="dot one"></div>
+                    <div class="dot two"></div>
+                    <div class="dot three"></div>
+                    <div class="dot four"></div>
+                    <div class="dot five"></div>
+                </div>
+                <div class="face six">
+                    <div class="dot one"></div>
+                    <div class="dot two"></div>
+                    <div class="dot three"></div>
+                    <div class="dot four"></div>
+                    <div class="dot five"></div>
+                    <div class="dot six"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="container" id="container3">
+        <p id="roll-count">Total Rolls: 0</p>
+        <p id="roll-odds">Odds: 0%</p>
+    </div>
+
+    <button onclick="rollDice()">Roll Dice</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
