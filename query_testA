@@ -1,0 +1,28 @@
+import cx_Oracle
+
+# Database connection details
+dsn_tns = cx_Oracle.makedsn("localhost", "1521", sid="orcl")  
+
+try:
+    # Establish connection
+    connection = cx_Oracle.connect(user="c##dicegame", password="stephen123", dsn=dsn_tns)
+    print("Connected to Oracle Database!")
+
+    # Create a cursor
+    cursor = connection.cursor()
+
+    # Run a query
+    cursor.execute("SELECT * FROM dice_rolls")  # Replace with your actual table name
+
+    # Fetch and print results
+    for row in cursor.fetchall():
+        print(row)
+
+    # Close the cursor and connection
+    cursor.close()
+    connection.close()
+    print("Connection closed.")
+
+except cx_Oracle.DatabaseError as e:
+    print(f"There was an error connecting to Oracle: {e}")
+

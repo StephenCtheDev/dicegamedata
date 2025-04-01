@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Roll Combinations</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Dice Roll Combinations</h1>
+    <div class="grid-container">
+        <!-- Generate all 36 dice combinations dynamically -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const grid = document.querySelector(".grid-container");
+                for (let i = 1; i <= 6; i++) {
+                    for (let j = 1; j <= 6; j++) {
+                        let div = document.createElement("div");
+                        div.classList.add("grid-item");
+                        div.setAttribute("data-dice", `${i}-${j}`);
+                        div.innerHTML = `🎲 ${i} - 🎲 ${j} <br> Count: 0`;
+                        grid.appendChild(div);
+                    }
+                }
+            });
+        </script>
+    </div>
+</body>
+</html>
