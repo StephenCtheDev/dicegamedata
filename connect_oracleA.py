@@ -1,28 +1,34 @@
 import cx_Oracle
 
 # Database connection details
-dsn = cx_Oracle.makedsn("localhost", "1521", sid = 'orcl')  # Use SID if needed
+dsn = cx_Oracle.makedsn("45.86.211.19", "1521", sid="orcl")
 
 try:
     connection = cx_Oracle.connect("c##dicegame", "stephen123", dsn)
     cursor = connection.cursor()
 
+    print("Connected to Oracle successfully!")
+
     # Ensure table exists
-    cursor.execute("""
-        BEGIN
-            EXECUTE IMMEDIATE 'CREATE TABLE dice_rolls (
-                die1 NUMBER,
-                die2 NUMBER,
-                roll_count NUMBER,
-                PRIMARY KEY (die1, die2)
-            )';
-        EXCEPTION WHEN OTHERS THEN
-            IF SQLCODE != -955 THEN -- Ignore "table already exists" error
-                RAISE;
-            END IF;
-        END;
-    """)
-    connection.commit()
+    try:
+        cursor.execute("""
+            DECLARE 
+                table_exists EXCEPTION;
+                PRAGMA EXCEPTION_INIT(table_exists, -955);
+            BEGIN
+                EXECUTE IMMEDIATE 'CREATE TABLE dice_rolls (
+                    die1 NUMBER,
+                    die2 NUMBER,
+                    roll_count NUMBER,
+                    PRIMARY KEY (die1, die2)
+                )';
+            EXCEPTION
+                WHEN table_exists THEN NULL; -- Ignore "table already exists" error
+            END;
+        """)
+        connection.commit()
+    except cx_Oracle.DatabaseError as e:
+        print(f"Table creation error: {e}")
 
     def update_roll_count(die1, die2):
         """Inserts or updates dice roll counts."""
@@ -38,7 +44,7 @@ try:
             """, {"die1": die1, "die2": die2})
             connection.commit()
         except cx_Oracle.DatabaseError as e:
-            print(f"Database error: {e}")
+            print(f"Database error (update_roll_count): {e}")
 
     def get_roll_counts():
         """Fetches all dice roll counts for display on the second HTML page."""
@@ -46,7 +52,7 @@ try:
             cursor.execute("SELECT die1, die2, roll_count FROM dice_rolls ORDER BY die1, die2")
             return cursor.fetchall()
         except cx_Oracle.DatabaseError as e:
-            print(f"Database error: {e}")
+            print(f"Database error (get_roll_counts): {e}")
             return []
 
 except cx_Oracle.DatabaseError as e:
@@ -57,3 +63,4 @@ finally:
         cursor.close()
     if 'connection' in locals():
         connection.close()
+
