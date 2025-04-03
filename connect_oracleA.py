@@ -1,34 +1,13 @@
 import cx_Oracle
 
-# Database connection details
-dsn = cx_Oracle.makedsn("45.86.211.19", "1521", sid="orcl")
+# Database connection details (Update with your AWS RDS endpoint)
+dsn = cx_Oracle.makedsn("dicegamedb.cs18k2emgxne.us-east-1.rds.amazonaws.com", 1521, service_name="DATABASE")  # Use service_name for RDS
 
 try:
-    connection = cx_Oracle.connect("c##dicegame", "stephen123", dsn)
+    connection = cx_Oracle.connect("admin", "GiveMeAllTheGoods789", dsn)
     cursor = connection.cursor()
 
-    print("Connected to Oracle successfully!")
-
-    # Ensure table exists
-    try:
-        cursor.execute("""
-            DECLARE 
-                table_exists EXCEPTION;
-                PRAGMA EXCEPTION_INIT(table_exists, -955);
-            BEGIN
-                EXECUTE IMMEDIATE 'CREATE TABLE dice_rolls (
-                    die1 NUMBER,
-                    die2 NUMBER,
-                    roll_count NUMBER,
-                    PRIMARY KEY (die1, die2)
-                )';
-            EXCEPTION
-                WHEN table_exists THEN NULL; -- Ignore "table already exists" error
-            END;
-        """)
-        connection.commit()
-    except cx_Oracle.DatabaseError as e:
-        print(f"Table creation error: {e}")
+    print("Connected to AWS Oracle RDS successfully!")
 
     def update_roll_count(die1, die2):
         """Inserts or updates dice roll counts."""
@@ -56,11 +35,12 @@ try:
             return []
 
 except cx_Oracle.DatabaseError as e:
-    print(f"Error connecting to Oracle: {e}")
+    print(f"Error connecting to Oracle RDS: {e}")
 
 finally:
     if 'cursor' in locals():
         cursor.close()
     if 'connection' in locals():
         connection.close()
+
 
